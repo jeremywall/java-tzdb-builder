@@ -1,6 +1,6 @@
 import java.time.zone.ZoneRulesProvider;
 
-public class GetTzdbVersion() {
+public class GetTzdbVersion {
 
     public static void main(String[] args) {
 
