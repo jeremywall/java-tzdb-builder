@@ -67,6 +67,8 @@ jobs:
       - run: head -c 20 $JAVA_HOME/lib/tzdb.dat
       - run: sudo java -jar ziupdater/ziupdater.jar -l file://`pwd`/tzdata`cat temp/version`-rearguard.tar.gz
       - run: ls -la $JAVA_HOME/lib/tzdb.dat
+      - run: sudo chmod 777 $JAVA_HOME/lib/tzdb.dat
+      - run: ls -la $JAVA_HOME/lib/tzdb.dat
       - run: head -c 20 $JAVA_HOME/lib/tzdb.dat
       
 
