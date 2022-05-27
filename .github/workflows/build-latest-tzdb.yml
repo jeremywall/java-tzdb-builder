@@ -14,6 +14,8 @@ jobs:
   check:
     name: Check if newer version available
     runs-on: ubuntu-latest
+    outputs:
+      build_required: ${{steps.build_required.outputs.required}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -29,20 +31,19 @@ jobs:
       - name: Print versions
         run: echo IANA version [${{steps.versions.outputs.iana_version}}] last processed version [${{steps.versions.outputs.last_processed_version}}]
       - name: Check if a build is required
-        id: build-required
+        id: build_required
         run: |
           if [ "${{steps.versions.outputs.iana_version}}" != "${{steps.versions.outputs.last_processed_version}}" ]; then
             echo "::set-output name=required::true"
           else
             echo "::set-output name=required::false"
           fi
-      - run: echo [${{steps.build-required.outputs.required}}]
   build:
     name: Build
     runs-on: ubuntu-latest
     needs: check
     steps:
-      - run: echo $JAVA_HOME
+      - run: echo ${{jobs.check.steps.build_required.outputs.required}}
 #      - run: which java
 #      - run: which javac
 #      - run: java -version
