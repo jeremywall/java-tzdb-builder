@@ -17,13 +17,15 @@ jobs:
       - run: javac -version
       - run: which java
       - run: which javac
+      - run: echo %JAVA_HOME%
       - run: wget -O- https://apt.corretto.aws/corretto.key | sudo apt-key add - 
       - run: sudo add-apt-repository 'deb https://apt.corretto.aws stable main'
       - run: sudo apt-get update
       - run: sudo apt-get install -y java-17-amazon-corretto-jdk
-      - run: ls -la /usr/lib/jvm
+      - run: ls -la /usr/lib/jvm/java-17-amazon-corretto
       - run: java -version
       - run: sudo update-alternatives --set java "/usr/lib/jvm/java-17-amazon-corretto/bin/java"
       - run: sudo update-alternatives --set javac "/usr/lib/jvm/java-17-amazon-corretto/bin/javac"
       - run: java -version
       - run: javac -version
+      - run: echo %JAVA_HOME%
