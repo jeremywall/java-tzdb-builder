@@ -20,10 +20,10 @@ jobs:
       - name: Fetch latest version number from IANA
         run: wget https://data.iana.org/time-zones/tzdb/version
       - name: Print versions
-        run: echo "Latest IANA `cat version` and Last processed version `cat last-processed-version`"
+        run: echo "Latest IANA version `cat version` and Last processed version `cat last-processed-version`"
 #      - name: Check if versions are different
-      - run: set current_version = cat version | sed 's/ *//g'
-      - run: set last_version = cat last-processed-version | sed 's/ *//g'
+      - run: current_version=cat version | sed 's/ *//g'
+      - run: last_version=cat last-processed-version | sed 's/ *//g'
       - run: echo $current_version
       - run: echo $last_version
 #          diff_result = $?
