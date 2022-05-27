@@ -22,10 +22,11 @@ jobs:
       - name: Print versions
         run: echo "Latest IANA `cat version` and Last processed version `cat last-processed-version`"
       - name: Check if versions are different
-        continue-on-error: true
         run: |
-          diff version last-processed-version > /dev/null 2>&1
-          echo $?
+          current_version = cat version | sed 's/ *//g'
+          last_version = cat last-processed-version | sed 's/ *//g'
+          echo $current_version
+          echo $last_version
 #          diff_result = $?
 #          if [ $diff_result -eq 0 ]
 #          then
