@@ -1,0 +1,53 @@
+<h2 id="description">Description</h2>
+<p>The tool allows to update Java with specific tzdata (timezone data).</p>
+<p>It compiles tzdata source information into files in binary format and puts these files into Java installation directory.</p>
+<p>For Java 8, the source data is compiled into single file placed at &lt;java.home&gt;/lib/tzdb.dat.</p>
+<p>For Java 7, the source data is compiled into multiple files placed at &lt;java.home&gt;/lib/zi folder.</p>
+<h2 id="usage-examples">Usage examples</h2>
+<p>Print tzdata version in Java</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="va">$JAVA_HOME</span><span class="ex">/bin/java</span> -jar ziupdater.jar -V
+<span class="ex">ziupdater</span> version 1.0.1.2
+<span class="ex">JRE</span> tzdata version: 2016i</code></pre></div>
+<p>Install tzdata from provided bundle</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="va">$JAVA_HOME</span><span class="ex">/bin/java</span> -jar ziupdater.jar -l file://[path]/tzdata.tar.gz</code></pre></div>
+<h2 id="known-limitations">Known limitations</h2>
+<ul>
+<li>the only supported URL protocol: file://</li>
+<li>no support for URL protocols: http://, https://</li>
+<li>no support for automatic installs of latest IANA tzdata</li>
+<li>no support for SHA-512 checks</li>
+<li>no support for IANA tzdata vanguard format</li>
+<li>upgrading to tzdata2018i or tzdata2019a may lead to various failures if version of Java does not include patch for <a href="https://bugs.openjdk.java.net/browse/JDK-8224560">JDK-8224560</a>. Make sure that this patch is included in version you use prior to upgrading.</li>
+</ul>
+<h2 id="licensing">Licensing</h2>
+<p>This project is licensed under the terms of the GPLv2 with Classpath Exception</p>
+<h2 id="building-notes">Building notes</h2>
+<p>Building this tool requires Java 7 as JAVA_HOME as it depends on some internal API (ZoneInfoFile) available in Java 7 but removed in Java 8</p>
+<p>Use the following command to build it:</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="ex">%</span> mvn clean package</code></pre></div>
+<h2 id="testing">Testing</h2>
+<p>Tests expect some environment variables to be set.</p>
+<p>Use the following command to test:</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="bu">export</span> <span class="va">TEST_JAVA=[path]</span>
+<span class="bu">export</span> <span class="va">TEST_TZDATA=[path]</span>/tzdata.tar.gz
+<span class="bu">export</span> <span class="va">TEST_JAR=[path]</span>/ziupdater.jar
+<span class="ex">mvn</span> test</code></pre></div>
+<p>The tool will update TEST_JAVA. Be aware of it.</p>
+<h2 id="changelog">Changelog</h2>
+<p>1.0.1.2</p>
+<ul>
+<li>initial release</li>
+</ul>
+<p>1.0.2.2</p>
+<ul>
+<li>added support for Java 11</li>
+</ul>
+<p>1.0.3.1</p>
+<ul>
+<li>this version supports tzdata2020b (where obsolete file pacificnew was removed)</li>
+</ul>
+</ul>
+<p>1.1.1.1</p>
+<ul>
+<li>added support for the vanguard format for Java 8 and higher</li>
+</ul>
