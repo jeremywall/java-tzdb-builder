@@ -51,7 +51,7 @@ jobs:
           mkdir temp
           cd temp
           wget https://data.iana.org/time-zones/releases/tzcode${{needs.check.outputs.latest_iana_version}}.tar.gz
-          wget https://data.iana.org/time-zones/releases/tzdata${{needs.checkutputs.latest_iana_version}}.tar.gz
+          wget https://data.iana.org/time-zones/releases/tzdata${{needs.check.outputs.latest_iana_version}}.tar.gz
           tar xzfv tzcode${{needs.check.outputs.latest_iana_version}}.tar.gz
           tar xzfv tzdata${{needs.check.outputs.latest_iana_version}}.tar.gz
           make rearguard_tarballs
