@@ -47,6 +47,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - run: java test/GetTzdbVersion.java
       - name: Fetch TZDB code and data from IANA
         run: |
           mkdir temp
