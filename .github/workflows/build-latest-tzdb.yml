@@ -42,6 +42,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     needs: check
+    if: needs.check.outputs.build_required == 'true'
     steps:
       - run: echo ${{needs.check.outputs.build_required}}
 #      - run: which java
