@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: check
     steps:
-      - run: echo ${{needs.check.steps.build_required.outputs.required}}
+      - run: echo ${{needs.check.outputs.build_required}}
 #      - run: which java
 #      - run: which javac
 #      - run: java -version
