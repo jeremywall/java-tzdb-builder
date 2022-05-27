@@ -38,6 +38,7 @@ jobs:
           else
             echo "::set-output name=required::false"
           fi
+      - run: echo "New build required = ${{steps.build_required.outputs.required}}"
   build:
     name: Build
     runs-on: ubuntu-latest
