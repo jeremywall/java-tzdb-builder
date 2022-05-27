@@ -60,7 +60,7 @@ jobs:
       - name: Check existing TZDB file permissions
         id: perms
         run: |
-          TZDB_PERMS=`stat -c "%a" %JAVA_HOME/lib/tzdb.dat`
+          TZDB_PERMS=`stat -c "%a" $JAVA_HOME/lib/tzdb.dat`
           echo "::set-output name=tzdb_perms::$TZDB_PERMS"
       - name: Run ziupdater
         run: sudo java -jar ziupdater/ziupdater.jar -l file://`pwd`/tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz
