@@ -21,12 +21,11 @@ jobs:
         run: wget https://data.iana.org/time-zones/tzdb/version
       - name: Print versions
         run: echo "Latest IANA `cat version` and Last processed version `cat last-processed-version`"
-      - name: Check if versions are different
-        run: |
-          current_version = cat version | sed 's/ *//g'
-          last_version = cat last-processed-version | sed 's/ *//g'
-          echo $current_version
-          echo $last_version
+#      - name: Check if versions are different
+      - run: current_version = cat version | sed 's/ *//g'
+      - run: last_version = cat last-processed-version | sed 's/ *//g'
+      - run: echo $current_version
+      - run: echo $last_version
 #          diff_result = $?
 #          if [ $diff_result -eq 0 ]
 #          then
