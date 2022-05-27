@@ -18,6 +18,9 @@ jobs:
       - run: which java
       - run: which javac
       - run: echo $JAVA_HOME
+      - run: ls -la $JAVA_HOME
+      - run: ls -la $JAVA_HOME/jre
+      - run: ls -la $JAVA_HOME/jre/lib
       - run: wget -O- https://apt.corretto.aws/corretto.key | sudo apt-key add - 
       - run: sudo add-apt-repository 'deb https://apt.corretto.aws stable main'
       - run: sudo apt-get update
@@ -26,6 +29,7 @@ jobs:
       - run: java -version
       - run: sudo update-alternatives --set java "/usr/lib/jvm/java-17-amazon-corretto/bin/java"
       - run: sudo update-alternatives --set javac "/usr/lib/jvm/java-17-amazon-corretto/bin/javac"
+      - run: export set JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto
       - run: java -version
       - run: javac -version
       - run: echo $JAVA_HOME
