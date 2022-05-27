@@ -44,8 +44,8 @@ jobs:
     needs: check
     if: needs.check.outputs.build_required == 'true'
     steps:
-      - run: mkdir tzdb-temp
-      - run: cd tzdb-temp
+      - run: mkdir tzdbtemp
+      - run: cd tzdbtemp
       - run: pwd
       - run: wget https://data.iana.org/time-zones/tzcode-latest.tar.gz
       - run: wget https://data.iana.org/time-zones/tzdata-latest.tar.gz
