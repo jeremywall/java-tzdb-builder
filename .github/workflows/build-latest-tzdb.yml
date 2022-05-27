@@ -29,7 +29,7 @@ jobs:
       - run: java -version
       - run: sudo update-alternatives --set java "/usr/lib/jvm/java-17-amazon-corretto/bin/java"
       - run: sudo update-alternatives --set javac "/usr/lib/jvm/java-17-amazon-corretto/bin/javac"
-      - run: export set JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto
+      - run: export JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto
       - run: java -version
       - run: javac -version
       - run: echo $JAVA_HOME
