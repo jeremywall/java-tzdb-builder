@@ -17,17 +17,26 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Fetch latest version number from IANA
+      - name: Fetch latest version file from IANA
         run: wget https://data.iana.org/time-zones/tzdb/version
-      - name: Print versions
-        run: echo "Latest IANA version [`cat version`] and Last processed version [`cat last-processed-version`]"
-      - run: |
+      - name: Determine versions
+        id: versions
+        run: |
           IANA_VERSION=`cat version | sed 's/ *//g'`
-          echo "::set-output name=IANA_VERSION::$IANA_VERSION"
+          echo "::set-output name=iana_version::$IANA_VERSION"
           LAST_PROCESSED_VERSION=`cat last-processed-version | sed 's/ *//g'`
-          echo "::set-output name=LAST_PROCESSED_VERSION::$LAST_PROCESSED_VERSION"
-        id: VERSIONS
-      - run: echo [${{steps.VERSIONS.outputs.IANA_VERSION}}] [${{steps.VERSIONS.outputs.LAST_PROCESSED_VERSION}}]
+          echo "::set-output name=last_processed_version::$LAST_PROCESSED_VERSION"
+      - name: Print versions
+        run: echo IANA version [${{steps.versions.outputs.iana_version}}] last processed version [${{steps.versions.outputs.last_processed_version}}]
+      - name: Check if a build is required
+        id: build-required
+        run: |
+          if [ "${{steps.versions.outputs.iana_version}}" != "${{steps.versions.outputs.last_processed_version}}" ]; then
+            echo "::set-output name=required::true"
+          else
+            echo "::set-output name=required::false"
+          fi
+      - run: echo [${{steps.build-required.outputs.required}}]
   build:
     name: Build
     runs-on: ubuntu-latest
