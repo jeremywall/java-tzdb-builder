@@ -19,8 +19,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - run: pwd
+      - run: ls -la
       - name: Fetch latest version file from IANA
         run: wget https://data.iana.org/time-zones/tzdb/version
+      - run: pwd
+      - run: ls -la
       - name: Determine versions
         id: versions
         run: |
