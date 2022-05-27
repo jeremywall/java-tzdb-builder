@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Fetch latest version number from IANA
         run: wget https://data.iana.org/time-zones/tzdb/version
-      - name: "Latest IANA: `cat version` and Last processed version: `cat last-processed-version`"
+      - run: "Latest IANA: `cat version` and Last processed version: `cat last-processed-version`"
   build:
     name: Build
     runs-on: ubuntu-latest
