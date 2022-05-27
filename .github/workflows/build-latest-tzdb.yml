@@ -46,8 +46,10 @@ jobs:
     steps:
       - run: mkdir tzdb-temp
       - run: cd tzdb-temp
+      - run: pwd
       - run: wget https://data.iana.org/time-zones/tzcode-latest.tar.gz
       - run: wget https://data.iana.org/time-zones/tzdata-latest.tar.gz
+      - run: ls -la
       - run: tar xzfv tzcode-latest.tar.gz
       - run: tar xzfv tzdata-latest.tar.gz
       - run: make rearguard_tarballs
