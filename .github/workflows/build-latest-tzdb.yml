@@ -17,6 +17,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: wget https://data.iana.org/time-zones/tzdb/version
+      - run: pwd
+      - run: ls -la
       - run: echo "Latest version from IANA is `cat version` and last processed version is `cat last-processed-version`"
   build:
     name: Build
