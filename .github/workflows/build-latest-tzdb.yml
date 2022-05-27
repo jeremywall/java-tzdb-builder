@@ -1,0 +1,17 @@
+name: Build Latest TZDB
+
+on:
+  workflow_dispatch:
+#  schedule:
+#    - cron: '0 0 * * *'
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - run: wget -O- https://apt.corretto.aws/corretto.key | sudo apt-key add - 
+      - run: add-apt-repository 'deb https://apt.corretto.aws stable main'
+      - run: apt-get update
+      - run: apt-get install -y java-17-amazon-corretto-jdk
+      - run: java -version
