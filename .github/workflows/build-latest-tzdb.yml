@@ -19,8 +19,7 @@ jobs:
       - run: which javac
       - run: echo $JAVA_HOME
       - run: ls -la $JAVA_HOME
-      - run: ls -la $JAVA_HOME/jre
-      - run: ls -la $JAVA_HOME/jre/lib
+      - run: ls -la $JAVA_HOME/lib
       - run: wget -O- https://apt.corretto.aws/corretto.key | sudo apt-key add - 
       - run: sudo add-apt-repository 'deb https://apt.corretto.aws stable main'
       - run: sudo apt-get update
