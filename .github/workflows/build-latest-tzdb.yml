@@ -25,6 +25,7 @@ jobs:
         continue-on-error: true
         run: |
           diff version last-processed-version > /dev/null 2>&1 || true
+          echo $?
 #          diff_result = $?
 #          if [ $diff_result -eq 0 ]
 #          then
