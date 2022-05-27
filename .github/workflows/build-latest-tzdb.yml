@@ -25,19 +25,19 @@ jobs:
         continue-on-error: true
         run: |
           diff version last-processed-version > /dev/null 2>&1 || true
-          diff_result = $?
-          if [ $diff_result -eq 0 ]
-          then
-            # versions are the same so nothing to do
-            echo "same"
-          elif [ $diff_result -eq 1 ]
-          then
-            # versions are NOT the same
-            echo "diff"
-          else
-            # there was an error
-            echo "error"
-          fi
+#          diff_result = $?
+#          if [ $diff_result -eq 0 ]
+#          then
+#            # versions are the same so nothing to do
+#            echo "same"
+#          elif [ $diff_result -eq 1 ]
+#          then
+#            # versions are NOT the same
+#            echo "diff"
+#          else
+#            # there was an error
+#            echo "error"
+#          fi
   build:
     name: Build
     runs-on: ubuntu-latest
