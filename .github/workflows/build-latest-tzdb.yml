@@ -50,18 +50,18 @@ jobs:
       - run: |
           mkdir temp
           cd temp
-          wget https://data.iana.org/time-zones/releases/tzcode${{needs.checks.outputs.latest_iana_version}}.tar.gz
-          wget https://data.iana.org/time-zones/releases/tzdata${{needs.checks.outputs.latest_iana_version}}.tar.gz
-          tar xzfv tzcode${{needs.checks.outputs.latest_iana_version}}.tar.gz
-          tar xzfv tzdata${{needs.checks.outputs.latest_iana_version}}.tar.gz
+          wget https://data.iana.org/time-zones/releases/tzcode${{needs.check.outputs.latest_iana_version}}.tar.gz
+          wget https://data.iana.org/time-zones/releases/tzdata${{needs.checkutputs.latest_iana_version}}.tar.gz
+          tar xzfv tzcode${{needs.check.outputs.latest_iana_version}}.tar.gz
+          tar xzfv tzdata${{needs.check.outputs.latest_iana_version}}.tar.gz
           make rearguard_tarballs
-          cp "tzdata${{needs.checks.outputs.latest_iana_version}}-rearguard.tar.gz" ..
+          cp "tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz" ..
       - run: pwd
       - run: ls -la
       - run: echo $JAVA_HOME
       - run: ls -la $JAVA_HOME/lib/tzdb.dat
       - run: head -c 20 $JAVA_HOME/lib/tzdb.dat
-      - run: sudo java -jar ziupdater/ziupdater.jar -l file://`pwd`/tzdata${{needs.checks.outputs.latest_iana_version}}-rearguard.tar.gz
+      - run: sudo java -jar ziupdater/ziupdater.jar -l file://`pwd`/tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz
       - run: ls -la $JAVA_HOME/lib/tzdb.dat
       - run: sudo chmod 777 $JAVA_HOME/lib/tzdb.dat
       - run: ls -la $JAVA_HOME/lib/tzdb.dat
