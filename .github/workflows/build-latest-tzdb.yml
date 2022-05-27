@@ -23,10 +23,14 @@ jobs:
       - name: Print versions
         run: echo "Latest IANA version `cat version` and Last processed version `cat last-processed-version`"
       - run: |
-          MY_STRING="hi there"
-          echo "::set-output name=content::$MY_STRING"
-        id: my_string
-      - run: echo ${{steps.my_string.outputs.content}}
+          IANA_VERSION=cat version | sed 's/ *//g'
+          echo "::set-output name=content::$IANA_VERSION"
+        id: IANA_VERSION
+      - run: |
+          LAST_PROCESSED_VERSION=cat last-processed-version | sed 's/ *//g'
+          echo "::set-output name=content::$LAST_PROCESSED_VERSION"
+        id: LAST_PROCESSED_VERSION
+      - run: echo ${{steps.IANA_VERSION.outputs.content}} ${{steps.LAST_PROCESSED_VERSION.outputs.content}}
   build:
     name: Build
     runs-on: ubuntu-latest
