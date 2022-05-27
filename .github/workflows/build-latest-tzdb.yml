@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: wget -O- https://apt.corretto.aws/corretto.key | sudo apt-key add - 
-      - run: add-apt-repository 'deb https://apt.corretto.aws stable main'
-      - run: apt-get update
-      - run: apt-get install -y java-17-amazon-corretto-jdk
+      - run: sudo add-apt-repository 'deb https://apt.corretto.aws stable main'
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y java-17-amazon-corretto-jdk
       - run: java -version
