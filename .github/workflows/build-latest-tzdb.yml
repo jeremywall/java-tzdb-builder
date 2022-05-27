@@ -15,8 +15,9 @@ jobs:
     name: Check if newer version available
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - run: wget https://data.iana.org/time-zones/tzdb/version
-      - run: echo "Latest version from IANA is `cat version`"
+      - run: echo "Latest version from IANA is `cat version` and last processed version is `cat last-processed-version`"
   build:
     name: Build
     runs-on: ubuntu-latest
