@@ -24,7 +24,7 @@ jobs:
       - name: Check if versions are different
         continue-on-error: true
         run: |
-          diff version last-processed-version > /dev/null 2>&1 || true
+          diff version last-processed-version > /dev/null 2>&1
           echo $?
 #          diff_result = $?
 #          if [ $diff_result -eq 0 ]
