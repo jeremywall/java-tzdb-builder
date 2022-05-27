@@ -21,7 +21,7 @@ jobs:
         run: wget https://data.iana.org/time-zones/tzdb/version
       - run : ls -la
       - name: Print versions
-        run: echo "Latest IANA version `cat version` and Last processed version `cat last-processed-version`"
+        run: echo "Latest IANA version [`cat version`] and Last processed version [`cat last-processed-version`]"
       - run: |
           IANA_VERSION=`cat version | sed 's/ *//g'`
           echo "::set-output name=content::$IANA_VERSION"
@@ -30,7 +30,7 @@ jobs:
           LAST_PROCESSED_VERSION=`cat last-processed-version | sed 's/ *//g'`
           echo "::set-output name=content::$LAST_PROCESSED_VERSION"
         id: LAST_PROCESSED_VERSION
-      - run: echo ${{steps.IANA_VERSION.outputs.content}} ${{steps.LAST_PROCESSED_VERSION.outputs.content}}
+      - run: echo [${{steps.IANA_VERSION.outputs.content}}] [${{steps.LAST_PROCESSED_VERSION.outputs.content}}]
   build:
     name: Build
     runs-on: ubuntu-latest
