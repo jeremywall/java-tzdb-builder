@@ -17,6 +17,7 @@ jobs:
     outputs:
       build_required: ${{steps.build_required.outputs.required}}
     steps:
+      - run: head -c 20 $JAVA_HOME/lib/tzdb.dat
       - name: Checkout code
         uses: actions/checkout@v3
       - run: pwd
@@ -61,6 +62,9 @@ jobs:
           cp "tzdata`cat version`-rearguard.tar.gz" ..
       - run: pwd
       - run: ls -la
+      - run: echo $JAVA_HOME
+      - run: head -c 20 $JAVA_HOME/lib/tzdb.dat
+      # - run: sudo java -jar ziupdater/ziupdater.jar -l file://`pwd`/tzdata`cat version`-rearguard.tar.gz
 
 
 #      - run: which java
