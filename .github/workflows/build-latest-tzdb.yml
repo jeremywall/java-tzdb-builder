@@ -48,15 +48,18 @@ jobs:
     needs: check
     if: needs.check.outputs.build_required == 'true'
     steps:
-      - run: mkdir tzdbtemp
-      - run: cd tzdbtemp
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - run: |
+          mkdir temp
+          cd temp
+          wget https://data.iana.org/time-zones/tzcode-latest.tar.gz
+          wget https://data.iana.org/time-zones/tzdata-latest.tar.gz
+          tar xzfv tzcode-latest.tar.gz
+          tar xzfv tzdata-latest.tar.gz
+          make rearguard_tarballs
+          cp "tzdata`cat version`-rearguard.tar.gz" ..
       - run: pwd
-      - run: wget https://data.iana.org/time-zones/tzcode-latest.tar.gz
-      - run: wget https://data.iana.org/time-zones/tzdata-latest.tar.gz
-      - run: ls -la
-      - run: tar xzfv tzcode-latest.tar.gz
-      - run: tar xzfv tzdata-latest.tar.gz
-      - run: make rearguard_tarballs
       - run: ls -la
 
 
