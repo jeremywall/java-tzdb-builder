@@ -27,3 +27,5 @@ jobs:
 #      - run: sudo update-alternatives --set java "/usr/lib/jvm/java-17-amazon-corretto/bin/java"
 #      - run: sudo update-alternatives --set javac "/usr/lib/jvm/java-17-amazon-corretto/bin/javac"
 #      - run: export JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto
+      - run: wget https://data.iana.org/time-zones/tzdb/version
+      - run: cat version
