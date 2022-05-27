@@ -69,4 +69,5 @@ jobs:
         run: sudo chmod ${{steps.perms.outputs.tzdb_perms}} $JAVA_HOME/lib/tzdb.dat
       - run: ls -la $JAVA_HOME/lib/tzdb.dat
       - run: head -c 20 $JAVA_HOME/lib/tzdb.dat
+      - run: java test/GetTzdbVersion.java
       
