@@ -38,14 +38,22 @@ jobs:
           else
             echo "::set-output name=required::false"
           fi
-      - run: echo "New build required = ${{steps.build_required.outputs.required}}"
   build:
     name: Build
     runs-on: ubuntu-latest
     needs: check
     if: needs.check.outputs.build_required == 'true'
     steps:
-      - run: echo ${{needs.check.outputs.build_required}}
+      - run: mkdir tzdb-temp
+      - run: cd tzdb-temp
+      - run: wget https://data.iana.org/time-zones/tzcode-latest.tar.gz
+      - run: wget https://data.iana.org/time-zones/tzdata-latest.tar.gz
+      - run: tar xzfv tzcode-latest.tar.gz
+      - run: tar xzfv tzdata-latest.tar.gz
+      - run: make rearguard_tarballs
+      - run: ls -la
+
+
 #      - run: which java
 #      - run: which javac
 #      - run: java -version
