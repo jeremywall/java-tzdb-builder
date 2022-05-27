@@ -47,7 +47,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - run: |
+      - name: Fetch TZDB code and data from IANA
+        run: |
           mkdir temp
           cd temp
           wget https://data.iana.org/time-zones/releases/tzcode${{needs.check.outputs.latest_iana_version}}.tar.gz
@@ -56,14 +57,16 @@ jobs:
           tar xzfv tzdata${{needs.check.outputs.latest_iana_version}}.tar.gz
           make rearguard_tarballs
           cp "tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz" ..
-      - run: pwd
-      - run: ls -la
-      - run: echo $JAVA_HOME
+      - name: Check existing TZDB file permissions
+        id: perms
+        run: |
+          TZDB_PERMS=`stat -c "%a" %JAVA_HOME/lib/tzdb.dat`
+          echo "::set-output name=tzdb_perms::$TZDB_PERMS"
+      - name: Run ziupdater
+        run: sudo java -jar ziupdater/ziupdater.jar -l file://`pwd`/tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz
       - run: ls -la $JAVA_HOME/lib/tzdb.dat
-      - run: head -c 20 $JAVA_HOME/lib/tzdb.dat
-      - run: sudo java -jar ziupdater/ziupdater.jar -l file://`pwd`/tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz
-      - run: ls -la $JAVA_HOME/lib/tzdb.dat
-      - run: sudo chmod 777 $JAVA_HOME/lib/tzdb.dat
+      - name: Restore TZDB file permissions
+        run: sudo chmod ${{steps.perms.outputs.tzdb_perms}} $JAVA_HOME/lib/tzdb.dat
       - run: ls -la $JAVA_HOME/lib/tzdb.dat
       - run: head -c 20 $JAVA_HOME/lib/tzdb.dat
       
