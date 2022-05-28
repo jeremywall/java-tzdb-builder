@@ -70,8 +70,14 @@ jobs:
         run: sudo chmod ${{steps.perms.outputs.tzdb_perms}} $JAVA_HOME/lib/tzdb.dat
       - name: Recheck installed TZDB version
         run: java test/GetTzdbVersion.java
-      - run: mkdir -p tzdb
-      - run: cp temp/tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz tzdb
-      - run: cp $JAVA_HOME/lib/tzdb.dat tzdb/tzdb-${{needs.check.outputs.latest_iana_version}}.dat
-      - run: ls -la tzdb
-      
+      - name: Prep files for commit
+        run: |
+          mkdir -p tzdb
+          cp temp/tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz tzdb
+          cp $JAVA_HOME/lib/tzdb.dat tzdb/tzdb-${{needs.check.outputs.latest_iana_version}}.dat
+      - name: Commit files if needed
+        uses: stefanzweifel/git-auto-commit-action@v4      
+        with:
+          commit_message: Build TZDB ${{needs.check.outputs.latest_iana_version}}
+          file_pattern: tzdb/tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz tzdb/tzdb-${{needs.check.outputs.latest_iana_version}}.dat
+          skip_dirty_check: false
