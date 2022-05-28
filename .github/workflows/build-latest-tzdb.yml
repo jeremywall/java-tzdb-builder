@@ -68,6 +68,8 @@ jobs:
         run: sudo chmod ${{steps.perms.outputs.tzdb_perms}} $JAVA_HOME/lib/tzdb.dat
       - name: Recheck installed TZDB version
         run: java test/GetTzdbVersion.java
+      - name: Runs tests
+        run: java test/CheckTimeZoneInformation.java
       - name: Prep files for commit
         run: |
           mkdir -p tzdb
