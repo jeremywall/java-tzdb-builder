@@ -5,10 +5,8 @@ on:
   push:
     branches:
       - main
-#  schedule:
-#    - cron: '0 0 * * *'
-
-# $JAVA_HOME/lib/tzdb.dat
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
   check:
