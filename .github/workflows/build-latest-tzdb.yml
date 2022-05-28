@@ -28,7 +28,7 @@ jobs:
         run: |
           LATEST_IANA_VERSION=`cat version | sed 's/ *//g'`
           echo "::set-output name=latest_iana_version::$LATEST_IANA_VERSION"
-          LAST_PROCESSED_VERSION=`cat last-processed-version | sed 's/ *//g'`
+          LAST_PROCESSED_VERSION=`cat last_processed_version | sed 's/ *//g'`
           echo "::set-output name=last_processed_version::$LAST_PROCESSED_VERSION"
       - run: echo Latest IANA version [${{steps.versions.outputs.latest_iana_version}}] and Last processed version [${{steps.versions.outputs.last_processed_version}}]
       - name: Check if a build is required
@@ -73,11 +73,12 @@ jobs:
       - name: Prep files for commit
         run: |
           mkdir -p tzdb
+          echo ${{needs.check.outputs.latest_iana_version}} > last_processed_version
           cp temp/tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz tzdb
           cp $JAVA_HOME/lib/tzdb.dat tzdb/tzdb-${{needs.check.outputs.latest_iana_version}}.dat
       - name: Commit files if needed
         uses: stefanzweifel/git-auto-commit-action@v4      
         with:
           commit_message: Build TZDB ${{needs.check.outputs.latest_iana_version}}
-          file_pattern: tzdb/tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz tzdb/tzdb-${{needs.check.outputs.latest_iana_version}}.dat
+          file_pattern: last_processed_version tzdb/tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz tzdb/tzdb-${{needs.check.outputs.latest_iana_version}}.dat
           skip_dirty_check: false
