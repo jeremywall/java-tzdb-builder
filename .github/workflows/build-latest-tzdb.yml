@@ -73,4 +73,5 @@ jobs:
       - run: mkdir -p tzdb
       - run: cp temp/tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz tzdb
       - run: cp $JAVA_HOME/lib/tzdb.dat tzdb/tzdb-${{needs.check.outputs.latest_iana_version}}.dat
+      - run: ls -la temp
       
