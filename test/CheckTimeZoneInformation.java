@@ -1,5 +1,6 @@
 import java.time.*;
 import java.time.zone.*;
+import java.util.*;
 
 public class CheckTimeZoneInformation {
 
@@ -19,6 +20,7 @@ public class CheckTimeZoneInformation {
 
     public void runCheck(String ianaZoneName) {
 
+        System.out.println(String.format("========== Running test for %s ==========", ianaZoneName));
         ZoneId zoneId = ZoneId.of(ianaZoneName);
 
         ZonedDateTime nowZdt = ZonedDateTime.now(zoneId);
