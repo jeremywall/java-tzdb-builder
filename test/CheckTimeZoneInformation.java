@@ -41,7 +41,7 @@ public class CheckTimeZoneInformation {
         System.out.println();
 
         // check the previous and next transition based on now
-        System.out.println("Checking zone rules' prev and next transition");
+        System.out.println("Checking zone rules for prev and next transition");
         ZoneOffsetTransition prevZoneOffsetTransition = zoneRules.previousTransition(nowInstant);
         if (prevZoneOffsetTransition != null) {
             System.out.println(
