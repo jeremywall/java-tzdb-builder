@@ -73,13 +73,16 @@ jobs:
         run: java test/CheckTimeZoneInformation.java
       - name: Prep files for commit
         run: |
-          mkdir -p tzdb
+          mkdir -p releases/${{needs.check.outputs.latest_iana_version}}
+          mkdir -p releases/latest
           echo ${{needs.check.outputs.latest_iana_version}} > last_processed_version
-          cp temp/tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz tzdb
-          cp $JAVA_HOME/lib/tzdb.dat tzdb/tzdb-${{needs.check.outputs.latest_iana_version}}.dat
+          cp temp/tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz releases/${{needs.check.outputs.latest_iana_version}}
+          cp $JAVA_HOME/lib/tzdb.dat releases/${{needs.check.outputs.latest_iana_version}}/tzdb${{needs.check.outputs.latest_iana_version}}.dat
+          cp temp/tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz releases/latest/tzdata-rearguard.tar.gz
+          cp $JAVA_HOME/lib/tzdb.dat releases/latest/tzdb.dat
       - name: Commit files if needed
         uses: stefanzweifel/git-auto-commit-action@v4      
         with:
           commit_message: Build TZDB ${{needs.check.outputs.latest_iana_version}}
-          file_pattern: last_processed_version tzdb/tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz tzdb/tzdb-${{needs.check.outputs.latest_iana_version}}.dat
+          file_pattern: last_processed_version releases/*
           skip_dirty_check: false
