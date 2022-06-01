@@ -87,10 +87,12 @@ jobs:
           file_pattern: last_processed_version releases/*
           skip_dirty_check: false
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: ncipollo/release-action@v1
         with:
+          allowUpdates: true
+          artifacts: "releases/${{needs.check.outputs.latest_iana_version}}/*"
           body: Release TZDB ${{needs.check.outputs.latest_iana_version}}
-          files: |
-            releases/${{needs.check.outputs.latest_iana_version}}/tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz
-            releases/${{needs.check.outputs.latest_iana_version}}/tzdb${{needs.check.outputs.latest_iana_version}}.dat
+          removeArtifacts: true
+          replaceArtifacts: true
+          tag: TZDB-${{needs.check.outputs.latest_iana_version}}
 
