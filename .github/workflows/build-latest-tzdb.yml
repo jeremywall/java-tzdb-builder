@@ -87,11 +87,19 @@ jobs:
           file_pattern: last_processed_version releases/*
           skip_dirty_check: false
       - name: Release
-        uses: ncipollo/release-action@v1
+        uses: softprops/action-gh-release@v1
         with:
-          allowUpdates: true
-          artifacts: "releases/${{needs.check.outputs.latest_iana_version}}/*"
           body: Release TZDB ${{needs.check.outputs.latest_iana_version}}
-          removeArtifacts: true
-          tag: TZDB-${{needs.check.outputs.latest_iana_version}}
+          files: |
+            releases/${{needs.check.outputs.latest_iana_version}}/*
+          name: Release TZDB ${{needs.check.outputs.latest_iana_version}}
+          tag_name: TZDB-${{needs.check.outputs.latest_iana_version}}
+      # - name: Release
+      #   uses: ncipollo/release-action@v1
+      #   with:
+      #     allowUpdates: true
+      #     artifacts: "releases/${{needs.check.outputs.latest_iana_version}}/*"
+      #     body: Release TZDB ${{needs.check.outputs.latest_iana_version}}
+      #     removeArtifacts: true
+      #     tag: TZDB-${{needs.check.outputs.latest_iana_version}}
 
