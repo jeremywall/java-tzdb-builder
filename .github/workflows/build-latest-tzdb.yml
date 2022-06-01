@@ -18,7 +18,6 @@ jobs:
       last_processed_version: ${{steps.versions.outputs.last_processed_version}}
     steps:
       - name: trigger is ${{github.event_name}}
-        run: echo ${{github.event_name}}
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Fetch latest version file from IANA
