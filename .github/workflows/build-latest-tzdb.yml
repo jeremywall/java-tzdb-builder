@@ -93,6 +93,6 @@ jobs:
           artifacts: "releases/${{needs.check.outputs.latest_iana_version}}/*"
           body: Release TZDB ${{needs.check.outputs.latest_iana_version}}
           removeArtifacts: true
-          replaceArtifacts: true
+          replacesArtifacts: true
           tag: TZDB-${{needs.check.outputs.latest_iana_version}}
 
