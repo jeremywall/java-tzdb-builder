@@ -86,3 +86,11 @@ jobs:
           commit_message: Build TZDB ${{needs.check.outputs.latest_iana_version}}
           file_pattern: last_processed_version releases/*
           skip_dirty_check: false
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body: Release TZDB ${{needs.check.outputs.latest_iana_version}}
+          files: |
+            releases/${{needs.check.outputs.latest_iana_version}}/tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz
+            releases/${{needs.check.outputs.latest_iana_version}}/tzdb${{needs.check.outputs.latest_iana_version}}.dat
+
