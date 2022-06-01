@@ -29,7 +29,7 @@ jobs:
           touch last_processed_version
           LAST_PROCESSED_VERSION=`cat last_processed_version | sed 's/ *//g'`
           echo "::set-output name=last_processed_version::$LAST_PROCESSED_VERSION"
-      - run: echo Latest IANA version [${{steps.versions.outputs.latest_iana_version}}] and Last processed version [${{steps.versions.outputs.last_processed_version}}]
+      - run: echo Latest IANA version [${{steps.versions.outputs.latest_iana_version}}] and Last processed version [${{steps.versions.outputs.last_processed_version}}] and Trigger [${{github.event_name}}]
       - name: Check if a build is required
         id: build_required
         run: |
