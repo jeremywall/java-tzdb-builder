@@ -17,7 +17,6 @@ jobs:
       latest_iana_version: ${{steps.versions.outputs.latest_iana_version}}
       last_processed_version: ${{steps.versions.outputs.last_processed_version}}
     steps:
-      - name: trigger is ${{github.event_name}}
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Fetch latest version file from IANA
@@ -25,18 +24,16 @@ jobs:
       - name: Determine versions
         id: versions
         run: |
-
           LATEST_IANA_VERSION=`cat version | sed 's/ *//g'`
           echo "::set-output name=latest_iana_version::$LATEST_IANA_VERSION"
           touch last_processed_version
-
           LAST_PROCESSED_VERSION=`cat last_processed_version | sed 's/ *//g'`
           echo "::set-output name=last_processed_version::$LAST_PROCESSED_VERSION"
       - run: echo Latest IANA version [${{steps.versions.outputs.latest_iana_version}}] and Last processed version [${{steps.versions.outputs.last_processed_version}}]
       - name: Check if a build is required
         id: build_required
         run: |
-          if [ "${{steps.versions.outputs.latest_iana_version}}" != "${{steps.versions.outputs.last_processed_version}}" ]; then
+          if [ "${{steps.versions.outputs.latest_iana_version}}" != "${{steps.versions.outputs.last_processed_version}}" || "${{github.event_name}}" != "schedule"]; then
             echo "::set-output name=required::true"
           else
             echo "::set-output name=required::false"
