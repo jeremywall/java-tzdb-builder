@@ -33,7 +33,7 @@ jobs:
       - name: Check if a build is required
         id: build_required
         run: |
-          if [[ "${{steps.versions.outputs.latest_iana_version}}" != "${{steps.versions.outputs.last_processed_version}}"]] || [["${{github.event_name}}" != "schedule"]]; then
+          if ["${{steps.versions.outputs.latest_iana_version}}" != "${{steps.versions.outputs.last_processed_version}}"] || ["${{github.event_name}}" != "schedule"]; then
             echo "::set-output name=required::true"
           else
             echo "::set-output name=required::false"
