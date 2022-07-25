@@ -38,6 +38,14 @@ jobs:
           else
             echo "::set-output name=required::false"
           fi
+      - name: Record last run timestamp
+        run: echo $(date) > last_run_timestamp
+      - name: Commit last run timestamp
+        uses: stefanzweifel/git-auto-commit-action@v4      
+        with:
+          commit_message: Update last run timestamp
+          file_pattern: last_run_timestamp
+          skip_dirty_check: false
   build:
     name: Build
     runs-on: ubuntu-latest
