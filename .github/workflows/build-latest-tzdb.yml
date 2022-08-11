@@ -93,6 +93,8 @@ jobs:
         with:
           commit_message: Build TZDB ${{needs.check.outputs.latest_iana_version}}
           file_pattern: last_processed_version releases/*
+          skip_fetch: false
+          skip_checkout: true
           skip_dirty_check: false
       - name: Release
         uses: softprops/action-gh-release@v1
