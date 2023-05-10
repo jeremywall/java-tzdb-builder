@@ -15,3 +15,4 @@ The second artifact generated is the final tzdb.dat Time Zone Database data file
 - `releases` is a directory which contains the generated artifacts described above after each build of a new Time Zone Database release.
 - `ziupdater` is a directory which contains a cached copy of the ZIUpdater tool which the GitHub Action Workflow script uses to create the final tzdb.dat file.
 - `last_processed_version` is used to track the last version number of the Time Zone Database that was processed to avoid unecessary builds during periodic checks for new releases.
+- `last_run_timestamp` is used to track the last time an update check was performed.
