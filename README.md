@@ -16,3 +16,7 @@ The second artifact generated is the final tzdb.dat Time Zone Database data file
 - `ziupdater` is a directory which contains a cached copy of the ZIUpdater tool which the GitHub Action Workflow script uses to create the final tzdb.dat file.
 - `last_processed_version` is used to track the last version number of the Time Zone Database that was processed to avoid unecessary builds during periodic checks for new releases.
 - `last_run_timestamp` is used to track the last time an update check was performed.
+
+## Using the tzdb.dat file
+
+You need to locate and replace the tzdb.dat of your JVM with the updated tzdb.dat files released in this repository and then restart all Java applications on the computer so they can start using the new Time Zone Database. I've also written a [simple bash script](https://gist.github.com/jeremywall/af9d06e7e16fbafec1a3c2f90a672449) that makes a best effort attempt to do this.
