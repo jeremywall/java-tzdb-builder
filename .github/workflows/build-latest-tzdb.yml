@@ -67,7 +67,6 @@ jobs:
           tar xzfv tzcode${{needs.check.outputs.latest_iana_version}}.tar.gz
           tar xzfv tzdata${{needs.check.outputs.latest_iana_version}}.tar.gz
           make rearguard_tarballs
-          cp "tzdata${{needs.check.outputs.latest_iana_version}}-dirty-rearguard.tar.gz" "tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz"
           cp "tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz" ..
       - name: Backup existing TZDB file permissions
         id: perms
