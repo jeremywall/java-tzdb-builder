@@ -67,18 +67,22 @@ The tool will update TEST_JAVA. Be aware of it.
 
 ## Changelog
 
-1.0.1.2
+1.1.2.1
 
- * initial release
+ * this version supports tzdata2024b (with full month/day names)
 
-1.0.2.2
+1.1.1.1
 
- * added support for Java 11
+ * added support for the vanguard format for Java 8 and higher
 
 1.0.3.1
 
  * this version supports tzdata2020b (where obsolete file pacificnew was removed)
 
-1.1.1.1
+1.0.2.2
 
- * added support for the vanguard format for Java 8 and higher
+ * added support for Java 11
+
+1.0.1.2
+
+ * initial release

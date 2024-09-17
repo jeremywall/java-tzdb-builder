@@ -10,4 +10,4 @@ source distribution.
 
 Please email azul_openjdk@azul.com for further information.
 Include this version code in your email:
-   ZIUpdater 1.1.1.1
+   ZIUpdater 1.1.2.1
