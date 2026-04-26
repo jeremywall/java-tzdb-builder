@@ -67,6 +67,10 @@ The tool will update TEST_JAVA. Be aware of it.
 
 ## Changelog
 
+1.1.3.1
+
+ * upgraded Commons-IO dependency from version 2.4 to version 2.18.0
+
 1.1.2.1
 
  * this version supports tzdata2024b (with full month/day names)
