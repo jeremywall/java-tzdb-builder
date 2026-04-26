@@ -18,7 +18,7 @@ jobs:
       last_processed_version: ${{steps.versions.outputs.last_processed_version}}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
       - name: Fetch latest version file from IANA
         run: wget https://data.iana.org/time-zones/tzdb/version
       - name: Determine versions
@@ -53,7 +53,7 @@ jobs:
     if: needs.check.outputs.build_required == 'true'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
       - name: Git pull
         run: git pull
       - name: Check installed TZDB version
