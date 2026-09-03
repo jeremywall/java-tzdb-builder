@@ -18,7 +18,7 @@ jobs:
       last_processed_version: ${{steps.versions.outputs.last_processed_version}}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Fetch latest version file from IANA
         run: wget https://data.iana.org/time-zones/tzdb/version
       - name: Determine versions
@@ -41,7 +41,7 @@ jobs:
       - name: Record last run timestamp
         run: echo $(date) > last_run_timestamp
       - name: Commit last run timestamp
-        uses: stefanzweifel/git-auto-commit-action@v7      
+        uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7.2.0
         with:
           commit_message: Update last run timestamp
           file_pattern: last_run_timestamp
@@ -53,7 +53,7 @@ jobs:
     if: needs.check.outputs.build_required == 'true'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Git pull
         run: git pull
       - name: Check installed TZDB version
@@ -91,7 +91,7 @@ jobs:
           cp temp/tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz releases/latest/tzdata-rearguard.tar.gz
           cp $JAVA_HOME/lib/tzdb.dat releases/latest/tzdb.dat
       - name: Commit files if needed
-        uses: stefanzweifel/git-auto-commit-action@v7      
+        uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7.2.0
         with:
           commit_message: Build TZDB ${{needs.check.outputs.latest_iana_version}}
           file_pattern: last_processed_version releases/*
@@ -99,7 +99,7 @@ jobs:
           skip_checkout: true
           skip_dirty_check: false
       - name: Release
-        uses: softprops/action-gh-release@v3
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
         with:
           body: Release TZDB ${{needs.check.outputs.latest_iana_version}}
           files: |
