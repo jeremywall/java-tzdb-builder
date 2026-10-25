@@ -41,7 +41,7 @@ jobs:
       - name: Record last run timestamp
         run: echo $(date) > last_run_timestamp
       - name: Commit last run timestamp
-        uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7.2.0
+        uses: stefanzweifel/git-auto-commit-action@d0b01107b5db882071f96de5dd4b54961ea93f4c # v7.2.1
         with:
           commit_message: Update last run timestamp
           file_pattern: last_run_timestamp
@@ -91,7 +91,7 @@ jobs:
           cp temp/tzdata${{needs.check.outputs.latest_iana_version}}-rearguard.tar.gz releases/latest/tzdata-rearguard.tar.gz
           cp $JAVA_HOME/lib/tzdb.dat releases/latest/tzdb.dat
       - name: Commit files if needed
-        uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7.2.0
+        uses: stefanzweifel/git-auto-commit-action@d0b01107b5db882071f96de5dd4b54961ea93f4c # v7.2.1
         with:
           commit_message: Build TZDB ${{needs.check.outputs.latest_iana_version}}
           file_pattern: last_processed_version releases/*
